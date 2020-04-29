@@ -5,8 +5,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class JobsPage extends BasePage {
     private final JobsResultsPanel jobsResultsPanel;
-
     private final Job job;
+
+    public JobsPage(WebDriver driver) {
+        super(driver);
+        this.jobsResultsPanel = new JobsResultsPanel(driver);
+        this.job = new Job(driver);
+    }
 
     WebElement alertSaved() {
         return driver.findElement(By.xpath("//div[@class='alert alert-info ng-binding']"));
@@ -14,12 +19,6 @@ public class JobsPage extends BasePage {
 
     WebElement savedMsg() {
         return driver.findElement(By.cssSelector("div.alerts-content"));
-    }
-
-    public JobsPage(WebDriver driver) {
-        super(driver);
-        this.jobsResultsPanel = new JobsResultsPanel(driver);
-        this.job = new Job(driver);
     }
 
     public JobsResultsPanel results() {
@@ -33,6 +32,7 @@ public class JobsPage extends BasePage {
     public void saveJobByIndex(int index) throws InterruptedException {
         WebElement job = jobsResultsPanel.getAllJobCardsElements().get(index);
         job.click();
+        wait.until(ExpectedConditions.visibilityOf(job().jobContactPanel().getSave()));
         job().jobContactPanel().clickSave();
         Thread.sleep(2000);
         if (job().jobContactPanel().isSaved() != true) {

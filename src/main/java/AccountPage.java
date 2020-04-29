@@ -1,13 +1,15 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
-public class AccountPage {
-    private WebDriver driver;
+public class AccountPage extends BasePage {
+
     public AccountPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
+
     private final By emailInput = By.id("c_elem_0");
     private final By passwordInput = By.xpath("//input[@aria-labelledby='label-elem_1'][1]");
     private final By passwordReInput = By.xpath("//input[@aria-labelledby='label-elem_2'][1]");
@@ -71,6 +73,7 @@ public class AccountPage {
 
     public void createAccount(String email, String pass) throws Exception {
         fillNecessaryFields(email, pass);
+        wait.until(ExpectedConditions.elementToBeClickable(getBtnCreate()));
         clickCreate();
     }
 }
