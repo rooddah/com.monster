@@ -5,11 +5,9 @@ import org.openqa.selenium.support.ui.Select;
 
 public class AccountPage {
     private WebDriver driver;
-
     public AccountPage(WebDriver driver) {
         this.driver = driver;
     }
-
     private final By emailInput = By.id("c_elem_0");
     private final By passwordInput = By.xpath("//input[@aria-labelledby='label-elem_1'][1]");
     private final By passwordReInput = By.xpath("//input[@aria-labelledby='label-elem_2'][1]");
@@ -27,15 +25,12 @@ public class AccountPage {
     WebElement getPass1Input() {
         return driver.findElement(passwordInput);
     }
-
     WebElement getPass2Input() {
         return driver.findElement(passwordReInput);
     }
-
     WebElement getCheckbox() {
         return driver.findElement(checkbox);
     }
-
     Select dropdownJobCorpsCenter() {
         return new Select(driver.findElement(By.id("elem_3")));
     }
@@ -44,21 +39,21 @@ public class AccountPage {
         dropdownJobCorpsCenter().selectByIndex(1);
     }
 
-    public void checkCheckbox(){
-        if (getCheckbox()!=null) {
+    public void checkCheckbox() {
+        if (getCheckbox() != null) {
             getCheckbox().click();
         }
     }
 
     public void enterPass(String pass) {
-        if (getPass1Input()!=null && getPass2Input()!=null) {
+        if (getPass1Input() != null && getPass2Input() != null) {
             getPass1Input().sendKeys(pass);
             getPass2Input().sendKeys(pass);
         }
     }
 
     public void enterEmail(String email) {
-        if (getEmailInput()!=null) {
+        if (getEmailInput() != null) {
             getEmailInput().sendKeys(email);
         }
     }
@@ -78,6 +73,4 @@ public class AccountPage {
         fillNecessaryFields(email, pass);
         clickCreate();
     }
-
-
 }
